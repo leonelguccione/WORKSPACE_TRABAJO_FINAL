@@ -1,8 +1,17 @@
 package com.bd.tpfinal.model;
-
+import javax.persistence.*;
 import java.util.List;
 
-public class Address {
+@Entity
+@Table(name="address")
+//todo atributo es persistente a menos que se lo declare transient
+
+public class Address
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_address")
+    private Long id;
 
     private String name;
 
@@ -14,63 +23,84 @@ public class Address {
 
     private String description;
 
+    // un Client puede tener muchas direcciones
+    // estamos del lado de muchos (Client)
+    //@ManyToOne(fetch = FetchType.EAGER, cascade = {})
+    //@JoinColumn(name = "id_Client", nullable = false)
+    //como es unidireccional de este lado no se pone nada.
+    //al crearse la tabla se agrega automaticamente la columna "id_client"
+    //que esta especificada del lado del Client en la @OneToMany
     private Client client;
 
     private List<Order> orders;
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
     }
 
-    public String getApartment() {
+    public String getApartment()
+    {
         return apartment;
     }
 
-    public void setApartment(String apartment) {
+    public void setApartment(String apartment)
+    {
         this.apartment = apartment;
     }
 
-    public float[] getCoords() {
+    public float[] getCoords()
+    {
         return coords;
     }
 
-    public void setCoords(float[] coords) {
+    public void setCoords(float[] coords)
+    {
         this.coords = coords;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public Client getClient() {
+    public Client getClient()
+    {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(Client client)
+    {
         this.client = client;
     }
 
-    public List<Order> getOrders() {
+    public List<Order> getOrders()
+    {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<Order> orders)
+    {
         this.orders = orders;
     }
 }
