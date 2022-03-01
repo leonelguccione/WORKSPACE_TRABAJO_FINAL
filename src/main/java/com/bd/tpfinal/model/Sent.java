@@ -28,9 +28,11 @@ public class Sent extends OrderStatus
         return false;
     }
 
+    //TODO: esto activa la actualización de puntajes
     @Override
     public boolean canFinish()
     {
-        return false;
+        this.order.setStatus(new Delivered(order));
+        return true;
     }
 }

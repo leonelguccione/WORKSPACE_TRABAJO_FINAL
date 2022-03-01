@@ -18,13 +18,17 @@ public class Assigned extends OrderStatus
     @Override
     public boolean canRefuse()
     {
-        return false;
+        Cancel cancel = new Cancel(order);
+        cancel.setCancelledByClient(false);
+        this.order.setStatus(cancel);
+        return true;
     }
 
     @Override
     public boolean canDeliver()
     {
-        return false;
+        this.order.setStatus(new Sent(order));
+        return true;
     }
 
     @Override

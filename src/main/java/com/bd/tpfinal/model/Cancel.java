@@ -35,11 +35,13 @@ public class Cancel extends OrderStatus
         return false;
     }
 
-    public boolean isCancelledByClient() {
+    public boolean isCancelledByClient()
+    {
         return cancelledByClient;
     }
 
-    public void setCancelledByClient(boolean cancelledByClient) {
+    public void setCancelledByClient(boolean cancelledByClient)
+    {
         this.cancelledByClient = cancelledByClient;
     }
 

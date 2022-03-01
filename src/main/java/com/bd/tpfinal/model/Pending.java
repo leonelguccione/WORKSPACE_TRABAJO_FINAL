@@ -9,16 +9,23 @@ public class Pending extends OrderStatus
         this.order = order;
     }
 
+    //TODO: es posible que los vuelva void a todos
+    //Esto se ejecuta cuando el Client confirma y se lo asigna a un repartidor libre.
     @Override
     public boolean canAssign()
     {
-        return false;
+        order.setStatus(new Pending(order));
+        return true;
     }
 
+    //el pedido es cancelado por el Client
     @Override
     public boolean canRefuse()
     {
-        return false;
+        Cancel cancel = new Cancel(order);
+        cancel.setCancelledByClient(true);
+        this.order.setStatus(cancel);
+        return true;
     }
 
     @Override
