@@ -15,9 +15,14 @@ public class Item
 
     private String description;
 
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {})
+    @JoinColumn(name = "id_order", nullable = false)
     private Order order;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    //@JoinColumn(name = "product_id", referencedColumnName = "id_product")
+    //Product es el padre de la asociación
     private Product product;
 
     public int getQuantity()

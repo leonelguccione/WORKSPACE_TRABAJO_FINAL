@@ -8,6 +8,7 @@ public class Qualification
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_qualification")
     private Long id;
 
     private float score;

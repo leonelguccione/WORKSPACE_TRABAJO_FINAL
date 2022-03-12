@@ -1,5 +1,7 @@
 package com.bd.tpfinal.model;
 
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -45,22 +47,33 @@ public abstract class OrderStatus
         return false;
     }
 
-    //TODO: cambio esto.
-    //era concreto y retornaba false
-    public abstract boolean canAssign();
+      public boolean canAssign()
+    {
+        return false;
+    }
 
-    public abstract boolean canRefuse();
+    public boolean canRefuse()
+    {
+        return false;
+    }
 
-    public abstract boolean canDeliver();
+    public boolean canDeliver()
+    {
+        return false;
+    }
 
-    public abstract boolean canFinish();
+    public boolean canFinish()
+    {
+        return false;
+    }
 
     public boolean canCancel()
     {
         return false;
     }
 
-    public boolean addItem() throws Exception
+    //TODO: se agregó parámetro.
+    public boolean addItem(Item newItem) throws Exception
     {
         throw new Exception("No se puede realizarse esta accion");
     }

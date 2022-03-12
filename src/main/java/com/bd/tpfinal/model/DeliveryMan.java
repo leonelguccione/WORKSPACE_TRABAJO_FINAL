@@ -9,9 +9,13 @@ import java.util.List;
 @Table(name = "deliverymans")
 public class DeliveryMan extends User
 {
-    @Id
-    @GeneratedValue( strategy=GenerationType.AUTO )
-    private int id;
+    //hereda de user el campo id
+    /**
+     *     @Id
+     *     @GeneratedValue(strategy = GenerationType.AUTO)
+     *     @Column(name = "id_user")
+     *     protected Long id;
+     */
 
     private int numberOfSuccessOrders;
 
@@ -19,7 +23,13 @@ public class DeliveryMan extends User
 
     private Date dateOfAdmission;
 
+    //relación uno a muchos con Order. Lado UNO
+    // mappedBy: nombre del atributo del otro (muchos) lado que referencia a este lado (uno)
+    @OneToMany(mappedBy = "deliveryMan",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Order> ordersPending;
+
 
     public int getNumberOfSuccessOrders()
     {

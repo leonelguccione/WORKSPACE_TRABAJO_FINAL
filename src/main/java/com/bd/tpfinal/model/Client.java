@@ -1,5 +1,9 @@
 package com.bd.tpfinal.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -9,14 +13,26 @@ import java.util.List;
 public class Client extends User
 {
     //hereda el campo id de User
+
+    @Column(name = "date_of_register", updatable = false, nullable = false)
+    //@Temporal(TemporalType.DATE)
+    //@JsonProperty("date_of_register")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date dateOfRegister;
+
+    //relación uno a muchos con Order
+    //Lado Uno
+    // mappedBy: nombre del atributo del otro (muchos) lado que referencia a este lado (uno)
+    @OneToMany(mappedBy = "client",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
     //relación uno a muchos, unidireccional
     //estamos del lado de uno
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, orphanRemoval = false)
-    @JoinColumn(name="id_client")  //se crea automaticamente al crear la table de Address
     private List<Address> addresses;
+
 
     public Date getDateOfRegister()
     {

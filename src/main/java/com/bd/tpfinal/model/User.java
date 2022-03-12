@@ -1,14 +1,18 @@
 package com.bd.tpfinal.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+@MappedSuperclass
 public abstract class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_user")
+    @Column(name = "id_user", updatable = false, nullable = false)
     protected Long id; //para que el id lo hereden los hijos, estará bien ??
 
     private String name;
@@ -19,9 +23,15 @@ public abstract class User
 
     private String email;
 
-    private Date dateOfBirth;
+    @Column(name = "date_of_birth", updatable = false, nullable = false)
+    //@Temporal(TemporalType.DATE)
+    //@JsonProperty("date_of_birth")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    protected Date dateOfBirth;
 
-    private boolean scrore;  //supongo que es score, lo dejo como scrore
+    private boolean scrore;
 
     private int score;
 

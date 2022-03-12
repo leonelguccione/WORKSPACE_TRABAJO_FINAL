@@ -1,4 +1,6 @@
 package com.bd.tpfinal.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,13 +27,20 @@ public class Address
 
     // un Client puede tener muchas direcciones
     // estamos del lado de muchos (Client)
-    //@ManyToOne(fetch = FetchType.EAGER, cascade = {})
-    //@JoinColumn(name = "id_Client", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {})
+    @JoinColumn(name = "id_user", nullable = false)
+    @JsonBackReference //evita bucle infinito al toString
     //como es unidireccional de este lado no se pone nada.
     //al crearse la tabla se agrega automaticamente la columna "id_client"
     //que esta especificada del lado del Client en la @OneToMany
+    //@Column(name = "client")
     private Client client;
 
+    //private List<Order> ordersPending;
+
+    //relación uno a muchos con Order. Lado UNO
+    // mappedBy: nombre del atributo del otro (muchos) lado que referencia a este lado (uno)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
     public String getName()
