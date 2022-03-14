@@ -27,8 +27,8 @@ public abstract class User
     //@Temporal(TemporalType.DATE)
     //@JsonProperty("date_of_birth")
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     protected Date dateOfBirth;
 
     private boolean scrore;
